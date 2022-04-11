@@ -1,8 +1,10 @@
-import { autoDetect, colors } from '../dist/index.js';
+import { LaunchpadMK2, colors } from '../dist/index.js';
 const { colorFromHex, defaultColors } = colors;
 
 // upon connect the launchpad will be put into "Session" mode
-const lp = autoDetect();
+const lp = new LaunchpadMK2({
+  debug: false,
+});
 
 lp.on('rawMessage', (message) => {
   console.log('Raw message', message);

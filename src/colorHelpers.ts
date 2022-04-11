@@ -1,18 +1,16 @@
 import convert from 'color-convert';
-import { RgbColor } from './launchpads/base/ILaunchpad.js';
 
-export const defaultColors: Record<string, RgbColor> = {
+export const defaultColors = {
   off: [0, 0, 0],
-  red: [1, 0, 0],
-  green: [0, 1, 0],
-  blue: [0, 0, 1],
-  orange: [1, 0.26984127, 0],
+  red: [63, 0, 0],
+  green: [0, 63, 0],
+  blue: [0, 0, 63],
+  orange: [63, 17, 0],
 };
 
-/**
- * How many Palette colors there are
- */
-export const PALETTE_SIZE = 64;
+export function minMaxColor(color: number): number {
+  return Math.max(Math.min(color, 127), 0);
+}
 
 export function scaleBetween(unscaledNum: number, minAllowed: number, maxAllowed: number, min: number, max: number): number {
   return (maxAllowed - minAllowed) * (unscaledNum - min) / (max - min) + minAllowed;
@@ -21,11 +19,11 @@ export function scaleBetween(unscaledNum: number, minAllowed: number, maxAllowed
 /**
  * Converts an rgb array to an rgb array that the launchpad can accept
  *
- * @param {number[]} rgb the rgb value to convert (on a range from 0..255)
+ * @param {number[]} rgb the rgb value to convert
  * @returns {number[]} a color array that the launchpad can accept
  */
-export function colorFromRGB(rgb: [number, number, number]): RgbColor {
-  return rgb.map((v: number) => v / 255) as RgbColor;
+export function colorFromRGB(rgb: number[]): number[] {
+  return rgb.map((v: number) => scaleBetween(v, 0, 63, 0, 255));
 }
 
 /**
@@ -34,10 +32,10 @@ export function colorFromRGB(rgb: [number, number, number]): RgbColor {
  * @param {string} hex the color
  * @returns {number[]} a color array that the launchpad can accept
  */
-export function colorFromHex(hex: string): RgbColor {
+export function colorFromHex(hex: string): number[] {
   // Yes I used a package here, deal with it
   // This is for future proofing
   return convert.hex.rgb(hex)
     // scale the colors to fit between, 0-63
-    .map((v: number) => v / 255) as RgbColor;
+    .map((v: number) => scaleBetween(v, 0, 63, 0, 255));
 }

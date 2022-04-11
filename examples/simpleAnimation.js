@@ -1,7 +1,7 @@
-import { autoDetect, colors } from '../dist/index.js';
+import { LaunchpadMK2, colors } from '../dist/index.js';
 const { colorFromHex, colorFromRGB } = colors;
 
-const lp = autoDetect();
+const lp = new LaunchpadMK2();
 
 let currentFrame = 0;
 // this was coded by hand, yeah I know

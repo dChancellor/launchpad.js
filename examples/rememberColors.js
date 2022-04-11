@@ -1,10 +1,10 @@
 // by now you can probably see that this is just me having fun :P
 
-import { colors, autoDetect } from '../dist/index.js';
+import { colors, LaunchpadMK2 } from '../dist/index.js';
 
 const { colorFromHex, defaultColors } = colors;
 
-const lp = autoDetect();
+const lp = new LaunchpadMK2();
 
 lp.once('ready', (name) => {
   console.log(`Connected to ${name}`);

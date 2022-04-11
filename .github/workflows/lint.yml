@@ -1,13 +1,7 @@
-name: Lint and Test Code
+name: Lint Code
 
 on:
-  push:
-  pull_request:
-    types:
-      - edited
-      - opened
-      - synchronize
-      - reopened
+  - push
 
 jobs:
   build:
@@ -26,5 +20,3 @@ jobs:
         run: npm ci
       - name: Run eslint
         run: npm run lint
-      - name: Run tests
-        run: npm run test

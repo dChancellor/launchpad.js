@@ -1,7 +1,7 @@
-import { autoDetect, colors } from '../dist/index.js';
+import { LaunchpadMK2, colors } from '../dist/index.js';
 const { colorFromHex } = colors;
 
-const lp = autoDetect();
+const lp = new LaunchpadMK2();
 
 // just a basic color setup
 const noteColors = {
@@ -21,12 +21,11 @@ lp.once('ready', (name) => {
 });
 
 // set to true to pulse instead
-const pulse = true;
+const pulse = false;
 const flashColor = 5;
 const states = {};
 
-lp.on('buttonDown', (button) => {
-  const note = button.nr;
+lp.on('buttonDown', (note, value) => {
 
   // we are currently flashing
   if (states[note]) {

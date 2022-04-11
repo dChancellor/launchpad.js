@@ -1,9 +1,0 @@
-{
-  "extends": "../tsconfig.json",
-  "compilerOptions": {
-    "rootDir": "..",
-    /* This file is just for type checking, ts-jest will run .ts directly */
-    "noEmit": true
-  },
-  "include": ["../src/**/*.ts", "../customTypings/**/*.ts", "../test/**/*.ts"]
-}
